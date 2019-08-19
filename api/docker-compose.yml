@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+
+  twit-tee:
+    build: .
+    volumes:
+      - ./usr/src/app
+    ports:
+      - "8001:8001"
+    restart: always

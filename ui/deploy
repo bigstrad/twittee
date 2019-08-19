@@ -1,0 +1,20 @@
+<<PC>>
+
+ssh bigstrad@web1.twit-tee.com rm -rf /home/bigstrad/twit-tee
+
+scp -r /Users/bigstrad/Documents/Development/NodeJSApps/twittee/ui/build bigstrad@web1.twit-tee.com:/home/bigstrad/twit-tee
+
+# ignore; not yet tested
+# rsync av -e ssh --exclude=‘*.mp3’ /Users/bigstrad/Documents/Development/web_templates/twit-tee bigstrad@web1.twit-tee.com:/home/bigstrad
+
+<<SERVER>>
+
+ssh bigstrad@web1.twit-tee.com
+
+sudo rm -rf /var/www/twit-tee/
+
+sudo cp -r /home/bigstrad/twit-tee/ /var/www
+
+sudo chown -R www-data:www-data /var/www/twit-tee
+
+sudo chmod 0755 /var/www/twit-tee

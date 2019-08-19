@@ -1,0 +1,48 @@
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 400;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+}
+
+@font-face {
+  font-family: "DM Serif Text";
+  src: local("DM Serif Text"), url(./fonts/DMSerif_Text/DMSerifText-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Markazi Text";
+  src: local("Markazi Text"), url(./fonts/Markazi_Text/MarkaziText-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: local("Poppins"), url(./fonts/Poppins/Poppins-Regular.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "Prata";
+  src: local("Prata"), url(./fonts/Prata/Prata-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Raleway";
+  src: local("Raleway"), url(./fonts/Raleway/Raleway-Regular.ttf) format("truetype");
+}
+
+body {
+  font-family: "San Francisco", -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.modal-dialog { 
+  width: 360px;
+}
+
+.modal-body { 
+  height: 400px;
+}
+
+.modal-footer {
+  border-top: none;
+}
