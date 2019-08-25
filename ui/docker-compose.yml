@@ -5,11 +5,13 @@ services:
   twit-tee:
     image: twit-tee-ui-image
     container_name: twit-tee-ui
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        nginxconf: dev.conf
     #volumes:
     #  - ./app
     ports:
       - "80:80"
-    env_file:
-     - ./.env
     restart: always
