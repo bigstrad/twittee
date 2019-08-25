@@ -1,6 +1,6 @@
-FROM node:11-alpine
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+FROM node:12-alpine
+RUN apk update
+WORKDIR /app
 COPY . .
 RUN npm install
 EXPOSE 8001
