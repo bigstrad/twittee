@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+
+  twit-tee:
+    image: twit-tee-ui-image
+    container_name: twit-tee-ui
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        nginxconf: dev.conf
+    #volumes:
+    #  - ./app
+    ports:
+      - "80:80"
+    restart: always
