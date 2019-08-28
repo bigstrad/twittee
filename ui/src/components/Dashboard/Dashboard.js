@@ -6,6 +6,7 @@ import { Route, NavLink } from 'react-router-dom';
 import Home from '../Home/Home.js';
 import MakeTee from '../MakeTee/MakeTee.js';
 import Contact from '../Contact/Contact.js';
+import Git from '../Git/Git.js';
 
 // layout
 import {
@@ -63,6 +64,7 @@ class Dashboard extends React.Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/maketee" component={MakeTee} />
           <Route exact path="/contact" component={Contact} />
+          <Route exact path="/git" component={Git} />
         </div>
       </div>
     );
