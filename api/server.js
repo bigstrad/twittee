@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const port = process.env.TWIT_TEE_API_PORT || 8001;
 const tweetutil = require("./tweetutil.js");
+const gitutil = require("./gitutil.js");
 
 app.get('/api/twit/:userId/:tweetId', (req, res) => {
     let userId = req.params.userId;
@@ -20,6 +21,16 @@ app.get('/api/twit/:userId/:tweetId', (req, res) => {
 app.get('/api/twit/:userId', (req, res) => {
     let userId = req.params.userId;
     tweetutil.parseLiveTweet(userId)
+    .then(response => {
+        res.json(response)
+    })
+    .catch(error => {
+        res.send(error)
+    })
+});
+
+app.get('/api/git', (req, res) => {
+    gitutil.getInfo()
     .then(response => {
         res.json(response)
     })
