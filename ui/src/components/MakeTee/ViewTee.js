@@ -6,7 +6,7 @@ function ViewTee(props) {
     let { teeOptions, twit } = props;
 
     // methods
-    const fontTeeColor = () => {
+    const fontTeeColor = () => { // hardcoded - bad smell
         let dark = teeOptions.color.value.startsWith('dark');
         if(dark) {
         return 'white';
