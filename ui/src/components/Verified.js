@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 function Verified(props) {
     let { isVerified, height, width } = props;
-    console.log("isVerified", isVerified); // TODO remove
     const style = {
         verified: {color: 'rgba(29,161,242,1.00)', 
         fill: 'rgba(29,161,242,1.00)',  

@@ -2,29 +2,62 @@ version: '3'
 
 services:
 
-  twit-tee-api:
+  cache:
+    image: redis
+    container_name: twit-tee-cache
+    expose:
+      - 6379
+    restart: always
+    networks:
+      - twit-tee-private
+
+  database:
+    image: mongo:3.4.10
+    container_name: twit-tee-db
+    ports:
+      - 27017
+    volumes: 
+      - /data/db:/data/db
+    restart: always
+    networks:
+      - twit-tee-private
+
+  api:
     image: twit-tee-api-image
     container_name: twit-tee-api
     build: ./api
-    volumes:
-      - ./api/app
     ports:
-      - "8001:8001"
+      - 8001
     env_file:
      - ./api/.env
     restart: always
+    networks:
+      - twit-tee-public
+      - twit-tee-private
+    depends_on: 
+      - database
+      - cache
 
-  twit-tee-ui:
+  ui:
     image: twit-tee-ui-image
     container_name: twit-tee-ui
     build:
       context: ./ui
       dockerfile: Dockerfile
       args:
-        #nginxconf: dev.conf
-        nginxconf: default.conf
-    #volumes:
-    #  - ./ui/app
+        nginxconf: $NGINX_CONFIG
     ports:
-      - "80:80"
+      - 80:80
     restart: always
+    networks:
+      - twit-tee-public
+      - twit-tee-private
+    depends_on: 
+      - api
+
+networks:
+  twit-tee-private:
+    driver: bridge
+    internal: true
+  twit-tee-public:
+    driver: bridge
