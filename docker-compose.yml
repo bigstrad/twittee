@@ -48,6 +48,7 @@ services:
         nginxconf: $NGINX_CONFIG
     ports:
       - 80:80
+      - 443:80
     restart: always
     networks:
       - twit-tee-public
