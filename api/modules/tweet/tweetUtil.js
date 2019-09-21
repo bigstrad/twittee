@@ -74,25 +74,28 @@ parseData = function (data) {
             name: row.user.name,
             screen_name: row.user.screen_name,
             verified: row.user.verified,
-            profile_img_url: row.user.profile_image_url,
+            profile_img_url: parseProfileImg(row.user.profile_image_url),
             created_at: row.created_at,
             id_str: row.id_str,
-            full_text: parseDataRow(row.full_text)
+            full_text: parseFullText(row.full_text)
         };
         out.push(jsonParsed);
     });
     return out;
 }
 
-parseDataRow = function (data) {
-    return data;
-    let place = data.search('https://t.co/');
-    if (place === -1) {
-        return data;
-    }
-    return data.substring(0, place);
+parseProfileImg = function (data) {
+    return data.replace("http://", "https://")
 }
 
+parseFullText = function (data) {
+    return data;
+    // let place = data.search('https://t.co/');
+    // if (place === -1) {
+    //     return data;
+    // }
+    // return data.substring(0, place);
+}
 // function saveTweet(tweetData, fileName) {
 //     fileName = path.resolve(__dirname) + '/' + fileName;
 //     fs.writeFile(fileName, JSON.stringify(tweetData), (err) => {
