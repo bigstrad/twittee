@@ -27,7 +27,7 @@
 > <span style="color:gray">*...DOCKER UI on LOCALHOST*</span><br/>
 > NGINX_CONFIG=dev.conf
 >
-> <span style="color:gray">*...DOCKER UI on SERVER*</span><span style="color:red"> USE THIS OPTION PRIOR TO PUSHING TO GIT!</span><br/>
+> <span style="color:gray">*...DOCKER UI on SERVER*</span><span style="color:red"> IMPORTANT!</span><br/>
 > NGINX_CONFIG=default.conf
 
 # Run Without Docker or When Developing...

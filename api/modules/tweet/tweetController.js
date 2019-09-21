@@ -60,8 +60,10 @@ exports.index = (req, res) => {
 };
 
 exports.create = (req, res) => {
+    const cacheKey = 'tweetaccount';
     TweetService.create(req, res)
         .then(result => {
+            cache.del(cacheKey, {})
             res.json(result);
         })
         .catch(err => {
@@ -70,8 +72,10 @@ exports.create = (req, res) => {
 };
 
 exports.delete = (req, res) => {
+    const cacheKey = 'tweetaccount';
     TweetService.delete(req, res)
         .then(result => {
+            cache.del(cacheKey, {})
             res.json(result);
         })
         .catch(err => {

@@ -45,7 +45,7 @@ exports.create = function (req, res) {
 exports.delete = function (req, res) {
     return new Promise((resolve, reject) => {
         let data = req.body;
-        TweetAccount.deleteMany({ _id: data._id }) // switch to uuid
+        TweetAccount.deleteMany({ uuid: data.uuid })
             .then(result => {
                 resolve(result);
             })
