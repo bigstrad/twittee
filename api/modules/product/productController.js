@@ -53,9 +53,10 @@ exports.indexSize = (req, res) => {
 };
 
 exports.createColor = (req, res) => {
-    cache.del('color', {})
+    const cacheKey = 'color';
     ProductService.createColor(req, res)
         .then(result => {
+            cache.del(cacheKey, {})
             res.json(result);
         })
         .catch(err => {
@@ -64,9 +65,10 @@ exports.createColor = (req, res) => {
 };
 
 exports.createSize = (req, res) => {
-    cache.del('size', {})
+    const cacheKey = 'size';
     ProductService.createSize(req, res)
         .then(result => {
+            cache.del(cacheKey, {})
             res.json(result);
         })
         .catch(err => {
@@ -75,9 +77,10 @@ exports.createSize = (req, res) => {
 };
 
 exports.deleteColor = (req, res) => {
-    cache.del('color', {})
+    const cacheKey = 'color';
     ProductService.deleteColor(req, res)
         .then(result => {
+            cache.del(cacheKey, {})
             res.json(result);
         })
         .catch(err => {
@@ -86,9 +89,10 @@ exports.deleteColor = (req, res) => {
 };
 
 exports.deleteSize = (req, res) => {
-    cache.del('size', {})
+    const cacheKey = 'size';
     ProductService.deleteSize(req, res)
         .then(result => {
+            cache.del(cacheKey, {})
             res.json(result);
         })
         .catch(err => {
