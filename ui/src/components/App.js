@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { GlobalProvider } from './GlobalContext';
+import { GlobalContextProvider } from './Context';
 import Layout from './Dashboard/Dashboard.js';
 
 function App() {
-
-    // state
-    const [global, setGlobal] = useState({});
+    // state - only used to load the initial context
+    const [global, setGlobal] = useState({
+        twitAccountOptions: [],
+        teeColorOptions: [],
+        teeSizeOptions: [],
+        ready: false,
+    });
 
     // fetches
     const fetchTwitAccountOptions = () => {
@@ -32,22 +36,24 @@ function App() {
 
     /***
      * The gist here is to retrieve & combine all 
-     * global options and set the state once
+     * global options and set the state only after
+     * all fetches are complete.
      */
 
     // get global data
     const getGlobalData = () => {
-        const promises = [ // awareness of array order is critical below
-            fetchTwitAccountOptions(),
-            fetchTeeColorOptions(),
-            fetchTeeSizeOptions()
+        const promises = [ // awareness of array order is critical below!
+            fetchTwitAccountOptions(), // 0
+            fetchTeeColorOptions(), // 1
+            fetchTeeSizeOptions() // 2
         ]
         Promise.all(promises)
             .then(data => {
                 setGlobal({
-                    twitAccountOptions: data[0],
-                    teeColorOptions: data[1],
-                    teeSizeOptions: data[2]
+                    twitAccountOptions: data[0], // 0
+                    teeColorOptions: data[1], // 1
+                    teeSizeOptions: data[2], // 2
+                    ready: true,
                 });
             });
     }
@@ -57,12 +63,19 @@ function App() {
         getGlobalData();
     }, []); // fire once
 
+    const { ready, twitAccountOptions, teeColorOptions, teeSizeOptions } = global;
+    // Do not render until initial data is loaded
+    if (!ready) return null;
     return (
-        <GlobalProvider value={global}>
+        <GlobalContextProvider
+            twitAccountOptions={twitAccountOptions}
+            teeColorOptions={teeColorOptions}
+            teeSizeOptions={teeSizeOptions}
+        >
             <BrowserRouter>
                 <Layout />
             </BrowserRouter>
-        </GlobalProvider>
+        </GlobalContextProvider>
     )
 }
 

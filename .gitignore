@@ -1,3 +1,5 @@
 .DS_Store
 .env
 dataload.json
+dump.rdb
+dataload.json

@@ -1,6 +1,6 @@
 const Twit = require('twit')
-const path = require("path");
-const fs = require('fs');
+// const path = require("path");
+// const fs = require('fs');
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -77,7 +77,8 @@ parseData = function (data) {
             profile_img_url: parseProfileImg(row.user.profile_image_url),
             created_at: row.created_at,
             id_str: row.id_str,
-            full_text: parseFullText(row.full_text)
+            full_text: parseFullText(row.full_text),
+            qr_codes: parseQrCodes(row.full_text),
         };
         out.push(jsonParsed);
     });
@@ -89,13 +90,27 @@ parseProfileImg = function (data) {
 }
 
 parseFullText = function (data) {
-    return data;
-    // let place = data.search('https://t.co/');
-    // if (place === -1) {
-    //     return data;
-    // }
-    // return data.substring(0, place);
+    const linkTemplate = "https://t.co/";
+    let place = data.indexOf(linkTemplate);
+    // no links found, return as is
+    if (place === -1) {
+        return data;
+    }
+    // links found, return prior to first link
+    return data.substring(0, place);
 }
+
+parseQrCodes = function (data) {
+    const linkTemplate = "https://t.co/";
+    let place = data.indexOf(linkTemplate);
+    // no links found, return empty array
+    if (place === -1) {
+        return [];
+    }
+    // links found, return split array of links
+    return data.substring(place).split(" ");
+}
+
 // function saveTweet(tweetData, fileName) {
 //     fileName = path.resolve(__dirname) + '/' + fileName;
 //     fs.writeFile(fileName, JSON.stringify(tweetData), (err) => {

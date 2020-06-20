@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import GlobalContext from '../GlobalContext';
+import { GlobalContext } from '../Context';
 import { NavLink } from 'react-router-dom';
 import Logo from '../Logo.js';
 import ViewTee from '../MakeTee/ViewTee';
@@ -14,7 +14,7 @@ function Home() {
     "name": "Michelle Obama",
     "screen_name": "MichelleObama",
     "verified": true,
-    "profile_img_url": "https://pbs.twimg.com/profile_images/967808988879482880/tCuE8jn9_normal.jpg",
+    "profile_img_url": "https://pbs.twimg.com/profile_images/1192811236242722816/-r8d4_d3_normal.jpg",
     "created_at": "Mon Aug 12 16:46:58 +0000 2019",
     "id_str": "1160955846903439360",
     "full_text": "One of the best experiences of my life has been meeting young people all over the world. They’re proof that our best days are still ahead. \n\nOn #InternationalYouthDay, check out the @GirlsAlliance to help girls lead us into the years ahead: https://t.co/uAJh9LbSW0 https://t.co/Y1GLtBDQOg"
@@ -29,11 +29,11 @@ function Home() {
     "id_str": "",
     "full_text": ""
   };
-  const defaultTeeOptions = { // hard-coded. smell?
+  const defaultTeeOptions = { // hardcoded - bad smell
     color: { label: 'White', value: 'light-tee-white' },
     size: { label: 'Large', value: 'l' },
+    type: { label: '100% Cotton Short Sleeve', value: '100-pct-cotton-short-sleeve', cost: 29.95 },
   };
-
   // twit account options from global context
   const { twitAccountOptions } = global;
 
@@ -63,7 +63,7 @@ function Home() {
       }).then(function (json) {
         // let's randomly pick a tweet
         let tweet = json[Math.floor(Math.random() * json.length)];
-        if(tweet === undefined) {
+        if (tweet === undefined) {
           // user has no tweets - use backup
           tweet = backupTwit;
         }
@@ -73,7 +73,6 @@ function Home() {
         setTwit(backupTwit);
       })
   };
-
   return (
     <>
       <div className="container h-100">
@@ -85,9 +84,29 @@ function Home() {
             </p>
           </div>
           <div>
-            <ViewTee teeOptions={teeOptions} twit={twit} />
-            <NavLink exact to="/maketee" className="btn btn-outline-primary btn-lg" style={{ marginLeft: '17px' }}>Design My Twit-Tee!</NavLink>
+            <ViewTee
+              teeOptions={teeOptions}
+              twit={twit}
+              // containerZindex={10} // number
+              // containerPosition={'absolute'} // relative or absolute
+              // containerTop={'0px'} // pct or px
+              containerLeft={'40px'} // pct or px
+              imageWidthTee={'80%'} // pct or px
+            // imageWidthProfile={'30px'} // pct or px
+            // textTop={'19%'} // pct or px
+            textTop={global.calcTextTop(twit, 30)} // pct or px
+            textLeft={'12%'} // pct or px
+            textWidth={'52%'} // pct or px
+            textTransformScale={0.6} // decimal
+            // textAlign={'left'} // center, left, right, justify 
+            />
+            {/* <NavLink exact to="/maketee" className="btn btn-outline-primary btn-block" 
+              >Design My Twit-Tee!</NavLink> */}
           </div>
+        </div>
+        <div className="row">
+          <NavLink exact to="/maketee" className="btn btn-outline-primary btn-block"
+          >Design My Twit-Tee!</NavLink>
         </div>
       </div>
     </>

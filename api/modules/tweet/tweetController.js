@@ -59,6 +59,7 @@ exports.index = (req, res) => {
     });
 };
 
+// protected
 exports.create = (req, res) => {
     const cacheKey = 'tweetaccount';
     TweetService.create(req, res)
@@ -71,6 +72,7 @@ exports.create = (req, res) => {
         })
 };
 
+// protected
 exports.delete = (req, res) => {
     const cacheKey = 'tweetaccount';
     TweetService.delete(req, res)

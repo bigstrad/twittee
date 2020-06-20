@@ -13,7 +13,9 @@ const teeColorSchema = mongoose.Schema({
             required: true
         },
         uuid: { 
-            type: String
+            type: String,
+            required: true,
+            unique: true
         }
     //,
     // updated: {
@@ -32,7 +34,9 @@ const teeSizeSchema = mongoose.Schema({
         required: true
     },
     uuid: { 
-        type: String
+        type: String,
+        required: true,
+        unique: true
     }
 //,
 // updated: {

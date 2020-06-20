@@ -9,7 +9,9 @@ const tweetAccountSchema = mongoose.Schema({
         required: false
     },
     uuid: { 
-        type: String
+        type: String,
+        required: true,
+        unique: true
     },
     options: [{
         label: {
@@ -21,7 +23,9 @@ const tweetAccountSchema = mongoose.Schema({
             required: true
         },
         uuid: { 
-            type: String
+            type: String,
+            required: true,
+            unique: true
         }
     }]//,
     // updated: {
